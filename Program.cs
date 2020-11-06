@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WordProcessor.DataModel;
-using System.Configuration;
 
 namespace WordProcessor
 {
     class Program
     {
-        static string firstMessage = "Команды приложения:\nсоздание словаря [путь к файлу]\nобновление словаря [путь к файлу]\nочистка словаря\n";
-        static string createStr = "создание словаря";
-        static string updateStr = "обновление словаря";
-        static string clearStr = "очистка словаря";
+        private static string firstMessage = "Команды приложения:\nсоздание словаря [путь к файлу]\nобновление словаря [путь к файлу]\nочистка словаря\n";
+        private static string createStr = "создание словаря";
+        private static string updateStr = "обновление словаря";
+        private static string clearStr = "очистка словаря";
 
         static void Main(string[] args)
         {
+            // Указываем текущую директорию для работы с базой данных
             AppDomain.CurrentDomain.SetData("DataDirectory", Environment.CurrentDirectory);
             Console.WriteLine(firstMessage);
             
@@ -44,6 +40,11 @@ namespace WordProcessor
             }            
         }
         
+        /// <summary>
+        /// Извлечение пути к файлу из строки вводимой пользователем
+        /// </summary>
+        /// <param name="input">Строка вводимая пользователем</param>
+        /// <param name="command">Команда, с которой начинается строка</param>
         private static string GetPath(string input, string command)
         {
             return input.Substring(command.Length).Trim(new char[] { ' ', '\"'});
